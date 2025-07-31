@@ -4,6 +4,7 @@ transformers
 langchain-core
 sentencepiece
 typing_extensions
+timm
 
 # Application Framework
 gradio
