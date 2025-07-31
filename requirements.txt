@@ -1,0 +1,9 @@
+# Core ML/AI Libraries
+torch
+transformers
+langchain-core
+# sentencepiece
+typing_extensions
+
+# Application Framework
+gradio
