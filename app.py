@@ -1,7 +1,7 @@
 # app.py
 
 import gradio as gr
-from src.agent import NewsReporterAgent, AgentState, add_messages
+from agent import NewsReporterAgent, AgentState, add_messages
 from langchain_core.messages import HumanMessage, AIMessage
 
 # --- 1. Initialize the Agent ---

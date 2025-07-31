@@ -14,5 +14,7 @@ wheels/
 pyproject.toml
 uv.lock
 
+# This git repo is copy for huggingface
+HF_gemma_3n_2b_it_challenge_demo
 
 

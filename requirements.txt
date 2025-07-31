@@ -2,7 +2,7 @@
 torch
 transformers
 langchain-core
-# sentencepiece
+sentencepiece
 typing_extensions
 
 # Application Framework
