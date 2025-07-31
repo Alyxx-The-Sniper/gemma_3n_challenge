@@ -55,6 +55,11 @@ def run_save(current_state):
 
 # --- 3. Define the Gradio UI ---
 
+example_list = [
+    ["./examples/sample_interview.wav", "./examples/marikina_river.jpg", 'river.jpg']
+]
+
+
 with gr.Blocks(theme=gr.themes.Soft(), title="Multimodal News Reporter") as demo:
     agent_state = gr.State(value=None)
 
