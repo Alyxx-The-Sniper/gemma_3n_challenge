@@ -1,8 +1,30 @@
 # app.py
 
+import sys
+import os
+import numpy as np
+import librosa
+from scipy.io import wavfile
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 import gradio as gr
 from agent import NewsReporterAgent, AgentState, add_messages
 from langchain_core.messages import HumanMessage, AIMessage
+
+#######################################
+# Version check
+import torch
+import transformers
+import gradio
+
+# Now you can check the versions
+print("--- 🔍 CHECKING LIBRARY VERSIONS 🔍 ---")
+print(f"PyTorch version: {torch.__version__}")
+print(f"Transformers version: {transformers.__version__}")
+print(f"Gradio version: {gradio.__version__}")
+print("------------------------------------")
+#########################################
+
 
 # --- 1. Initialize the Agent ---
 # This loads the model once when the app starts.
@@ -10,7 +32,6 @@ agent = NewsReporterAgent()
 
 # --- 2. Define Gradio Logic Handlers ---
 # These functions orchestrate the agent's actions based on UI events.
-
 def run_initial_generation(audio_path, image_path):
     """Handles the first step: processing inputs and generating the initial report."""
     if not audio_path and not image_path:
@@ -29,6 +50,9 @@ def run_initial_generation(audio_path, image_path):
     image_description = state.get('image_description') or "No image was provided to describe."
 
     return latest_report, state, gr.update(visible=True), "", transcribed_text, image_description
+
+
+
 
 def run_revision(feedback, current_state):
     """Handles the revision step based on user feedback."""
@@ -54,10 +78,38 @@ def run_save(current_state):
     return save_update["final_message"]
 
 # --- 3. Define the Gradio UI ---
+# ------------------------------------------------------------------
+# Build examples: audio-only, image-only, and combined
+# ------------------------------------------------------------------
+# Define known file extensions
+AUDIO_EXTENSIONS = ['.wav', '.mp3', '.m4a', '.flac']
+IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp', '.gif']
+example_list = []
 
-example_list = [
-    ["./examples/sample_interview.wav", "./examples/marikina_river.jpg", 'river.jpg']
-]
+examples_dir = "examples"
+if os.path.isdir(examples_dir):
+    audio_files = sorted(
+        f for f in os.listdir(examples_dir)
+        if any(f.lower().endswith(ext) for ext in AUDIO_EXTENSIONS)
+    )
+    image_files = sorted(
+        f for f in os.listdir(examples_dir)
+        if any(f.lower().endswith(ext) for ext in IMAGE_EXTENSIONS)
+    )
+
+    # 1) audio-only
+    for af in audio_files:
+        example_list.append([os.path.join(examples_dir, af), None])
+
+    # 2) image-only
+    for imf in image_files:
+        example_list.append([None, os.path.join(examples_dir, imf)])
+
+    # 3) audio + image (pair first audio with first image, etc.)
+    for af, imf in zip(audio_files, image_files):
+        example_list.append([os.path.join(examples_dir, af),
+                             os.path.join(examples_dir, imf)])
+
 
 
 with gr.Blocks(theme=gr.themes.Soft(), title="Multimodal News Reporter") as demo:

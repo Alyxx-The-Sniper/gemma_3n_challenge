@@ -35,7 +35,6 @@ The repository is organized in a modular structure for clarity and maintainabili
 ├── examples/           # Contains sample files for the demo
 │   ├── sample_audio.mp3
 │   └── sample_image.jpg
-└── src/
 ├── init.py
 └── agent.py        # Core agent logic, model loading, and nodes
 
@@ -44,7 +43,7 @@ The repository is organized in a modular structure for clarity and maintainabili
 
 1.  **Clone the repository:**
     ```bash
-    git clone <your-repo-url>
+    git clone https://github.com/Alyxx-The-Sniper/AI_AGENT_REPORTER_DEMO_ONLY.git
     cd gemma_3n_challenge
     ```
 

@@ -1,4 +1,4 @@
-# src/agent.py
+# /agent.py
 
 import torch
 import gc
@@ -29,7 +29,7 @@ class NewsReporterAgent:
         print("--- 🚀 INITIALIZING MODEL (this may take a moment) ---")
         
         # Define the Hugging Face Hub model ID
-        model_id = "google/gemma-3n-e2b-it"
+        model_id = "google/gemma-3n-E2B-it" 
         
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         print(f"  > Using device: {self.device}")
