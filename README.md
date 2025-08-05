@@ -27,17 +27,18 @@ This application is designed to be deployed on platforms like Hugging Face Space
 The repository is organized in a modular structure for clarity and maintainability.
 
 
+```plaintext
 /
 ├── .gitignore
 ├── README.md
 ├── requirements.txt
-├── app.py              # Main Gradio app entry point
-├── examples/           # Contains sample files for the demo
+├── app.py            # Main Gradio app entry point
+├── examples/         # Contains sample files for the demo
 │   ├── sample_audio.mp3
 │   └── sample_image.jpg
 ├── init.py
-└── agent.py        # Core agent logic, model loading, and nodes
-
+└── agent.py          # Core agent logic: model loading and workflow
+```
 
 ## Setup and Installation
 
